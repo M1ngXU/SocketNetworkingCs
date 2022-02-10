@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 namespace UnitySocketManager
 {
@@ -16,7 +17,7 @@ namespace UnitySocketManager
 
 		internal static void Log(this ILogger l, string s)
 		{
-			if (LOG) Console.WriteLine(
+			if (LOG) Debug.Log(
 				DateTime.Now.Subtract(Start).ToString(@"\[hh\.mm\.ss\.ffff\]\ ")
 				+ l.Name.ToUpper().PadRight(20) + s
 			);

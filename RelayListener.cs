@@ -63,7 +63,7 @@ namespace UnitySocketManager
 						OnClientConnected(new ULongId(
 							Encoding.ASCII
 									.GetString(content)
-									.Split("|")
+									.Split('|')
 									.Select(s => byte.Parse(s))
 									.ToArray()
 						));
@@ -82,7 +82,7 @@ namespace UnitySocketManager
 			});
 		}
 
-		internal Task SendBinary(byte[] content) => Socket.SendAsync(content, WebSocketMessageType.Binary, true, default);
+		internal Task SendBinary(byte[] content) => Socket.SendAsync(new ArraySegment<byte>(content), WebSocketMessageType.Binary, true, default);
 
 		internal Task SendTo(ULongId id, byte[] content) => SendBinary(id.GetBytes().Concat(content).ToArray());
 	}

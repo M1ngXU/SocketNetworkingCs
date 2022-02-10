@@ -23,7 +23,7 @@ namespace UnitySocketManager
 			RelayListener.Listeners.Add(b =>
 			{
 				if (!Enumerable.SequenceEqual(b.Take(ULongId.GetBytes().Length), ULongId.GetBytes())) return;
-				b = b[ULongId.GetBytes().Length..];
+				b = b.SkipWhile((_, i) => i < ULongId.GetBytes().Length).ToArray();
 				this.Log("Server <== Relay: " + b.Length + " bytes");
 				int offset = 1;
 				Message m = MessageReceiver.HandleMessage(b[0], buf =>
