@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace UnitySocketManager
 {
@@ -20,7 +17,7 @@ namespace UnitySocketManager
 		/// </summary>
 		internal void Send(Message m)
 		{
-			foreach(byte[] data in m.GetSendableChunks(MaxMessageSize))
+			foreach (byte[] data in m.GetSendableChunks(MaxMessageSize))
 			{
 				SendRaw(data);
 			}
@@ -41,7 +38,8 @@ namespace UnitySocketManager
 		{
 			Message r = null;
 			CancellationTokenSource cts = new CancellationTokenSource();
-			Send(m, n => {
+			Send(m, n =>
+			{
 				r = n;
 				cts.Cancel();
 			});

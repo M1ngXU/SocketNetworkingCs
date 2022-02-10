@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Net;
 using System.Net.Sockets;
-using System.Text;
 
 namespace UnitySocketManager
 {
-	internal class ServerConnection: Connection
+	internal class ServerConnection : Connection
 	{
 		protected override int MaxMessageSize => Socket.SendBufferSize;
 

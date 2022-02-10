@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Net;
-using System.Net.Sockets;
-using System.Threading.Tasks;
-using UnitySocketManager;
 
 namespace UnitySocketManager
 {
@@ -21,7 +17,8 @@ namespace UnitySocketManager
 			ULongId = id;
 		}
 
-		internal override void Start(Action<Message> OnMessage) {
+		internal override void Start(Action<Message> OnMessage)
+		{
 			RelayListener.Start(b =>
 			{
 				this.Log(ULongId + " <== Relay: " + b.Length + " bytes");

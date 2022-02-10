@@ -21,7 +21,7 @@ namespace UnitySocketManager
 			{
 				this.Log("START");
 				new Server(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 5050));
-				var s = new SocketClient(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 5050), new ULongId(0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF));
+				SocketClient s = new SocketClient(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 5050), new ULongId(0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF));
 				s.Start(m => this.Log(m.Content));
 				this.Log(s.BlockUntilCallback(new Message(new byte[] { 65, 65, 65 }, 12, true)).Content);
 				while (true) { }

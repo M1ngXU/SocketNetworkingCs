@@ -1,7 +1,4 @@
-﻿using LocalRelayServer;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -9,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace UnitySocketManager
 {
-	internal class Server: ILogger
+	internal class Server : ILogger
 	{
 		string ILogger.Name => "Server";
 
@@ -39,7 +36,9 @@ namespace UnitySocketManager
 						this.Log(id + " connected");
 					}
 				).GetAwaiter().GetResult();
-			} catch {
+			}
+			catch
+			{
 				this.Log("Failed to connect to relay. Running local only.");
 			}
 
