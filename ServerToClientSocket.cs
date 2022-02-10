@@ -3,13 +3,13 @@ using System.Net.Sockets;
 
 namespace UnitySocketManager
 {
-	internal class ServerConnection : Connection
+	internal class ServerToClientSocket : Connection
 	{
 		protected override int MaxMessageSize => Socket.SendBufferSize;
 
 		private readonly Socket Socket;
 
-		internal ServerConnection(Socket s) => Socket = s;
+		internal ServerToClientSocket(Socket s) => Socket = s;
 
 		protected override void SendRaw(byte[] data) => Socket.Send(data);
 

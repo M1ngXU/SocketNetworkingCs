@@ -8,8 +8,6 @@ namespace UnitySocketManager
 		private readonly Action<Message>[] CallbackMessages = new Action<Message>[byte.MaxValue];
 		private readonly Message[] OpenMessages = new Message[byte.MaxValue];
 
-		internal MessageReceiver() { }
-
 		internal Message HandleMessage(byte header, Func<byte[], int> get_next)
 		{
 			Message m = new Message(new byte[] { header }, get_next);

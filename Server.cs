@@ -56,7 +56,7 @@ namespace UnitySocketManager
 					byte[] buf = new byte[8];
 					new_socket.Receive(buf);
 					ULongId id = new ULongId(buf);
-					ServerConnection s = new ServerConnection(new_socket);
+					ServerToClientSocket s = new ServerToClientSocket(new_socket);
 					s.Start(m => OnMessage(id, m));
 					ClientConnections.Add(id, s);
 					this.Log(id + " connected");
