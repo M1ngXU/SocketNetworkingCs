@@ -3,14 +3,14 @@ using System.Linq;
 
 namespace UnitySocketManager
 {
-	internal class RelayServer : Connection, ILogger
+	public class RelayServer : Connection, ILogger
 	{
 		private readonly RelayListener RelayListener;
 		private readonly ULongId ULongId;
 
 		string ILogger.Name => "Relay-Server";
 
-		internal RelayServer(ULongId id, RelayListener rl)
+		public RelayServer(ULongId id, RelayListener rl)
 		{
 			ULongId = id;
 			RelayListener = rl;
@@ -18,7 +18,7 @@ namespace UnitySocketManager
 
 		protected override void SendRaw(byte[] data) => RelayListener.SendTo(ULongId, data);
 
-		internal override void Start(Action<Message> OnMessage)
+		public override void Start(Action<Message> OnMessage)
 		{
 			RelayListener.Listeners.Add(b =>
 			{

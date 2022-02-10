@@ -8,19 +8,19 @@ using System.Threading.Tasks;
 
 namespace UnitySocketManager
 {
-	internal class RelayListener : ILogger
+	public class RelayListener : ILogger
 	{
 		string ILogger.Name => "Relay Listener";
 
 		public static string RelayServerDomainName = "ws://relayserver.m1ngxu.repl.co/";
-		internal readonly List<Action<byte[]>> Listeners = new List<Action<byte[]>>();
+		public readonly List<Action<byte[]>> Listeners = new List<Action<byte[]>>();
 
 		private readonly ULongId ULongId;
 		private ClientWebSocket Socket;
 
-		internal RelayListener(ULongId id = null) => ULongId = id;
+		public RelayListener(ULongId id = null) => ULongId = id;
 
-		internal async Task Start(Action<byte[]> OnMessage, Action<ULongId> OnClientConnected = null)
+		public async Task Start(Action<byte[]> OnMessage, Action<ULongId> OnClientConnected = null)
 		{
 			Socket = new ClientWebSocket();
 			await Socket.ConnectAsync(new Uri(RelayServerDomainName), default);
@@ -82,8 +82,8 @@ namespace UnitySocketManager
 			});
 		}
 
-		internal Task SendBinary(byte[] content) => Socket.SendAsync(new ArraySegment<byte>(content), WebSocketMessageType.Binary, true, default);
+		public Task SendBinary(byte[] content) => Socket.SendAsync(new ArraySegment<byte>(content), WebSocketMessageType.Binary, true, default);
 
-		internal Task SendTo(ULongId id, byte[] content) => SendBinary(id.GetBytes().Concat(content).ToArray());
+		public Task SendTo(ULongId id, byte[] content) => SendBinary(id.GetBytes().Concat(content).ToArray());
 	}
 }

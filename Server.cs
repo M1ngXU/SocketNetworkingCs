@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace UnitySocketManager
 {
-	internal class Server : ILogger
+	public class Server : ILogger
 	{
 		string ILogger.Name => "Server";
 
 		private readonly Socket Listener;
 		private readonly Dictionary<ULongId, Connection> ClientConnections = new Dictionary<ULongId, Connection>();
 
-		internal Server(IPEndPoint ip)
+		public Server(IPEndPoint ip)
 		{
 			Listener = new Socket(SocketType.Stream, ProtocolType.Tcp);
 
@@ -75,6 +75,6 @@ namespace UnitySocketManager
 			}
 		}
 
-		internal void Send(ULongId id, Message m) => ClientConnections[id]?.Send(m);
+		public void Send(ULongId id, Message m) => ClientConnections[id]?.Send(m);
 	}
 }

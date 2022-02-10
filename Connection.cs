@@ -3,19 +3,19 @@ using System.Threading;
 
 namespace UnitySocketManager
 {
-	internal abstract class Connection
+	public abstract class Connection
 	{
 		protected virtual int MaxMessageSize { get; } = int.MaxValue;
 		protected MessageReceiver MessageReceiver = new MessageReceiver();
 
 		protected abstract void SendRaw(byte[] data);
 
-		internal abstract void Start(Action<Message> OnMessage);
+		public abstract void Start(Action<Message> OnMessage);
 
 		/// <summary>
 		/// Sends a message.
 		/// </summary>
-		internal void Send(Message m)
+		public void Send(Message m)
 		{
 			foreach (byte[] data in m.GetSendableChunks(MaxMessageSize))
 			{
@@ -25,7 +25,7 @@ namespace UnitySocketManager
 		/// <summary>
 		/// Sends the message & calls the function when a response is received
 		/// </summary>
-		internal void Send(Message m, Action<Message> a)
+		public void Send(Message m, Action<Message> a)
 		{
 			m.IsCallback = true;
 			MessageReceiver.AddListener(m.Id, a);
@@ -34,7 +34,7 @@ namespace UnitySocketManager
 		/// <summary>
 		/// Sends a message and returns the Message that is responded, blocking with a timeout.
 		/// </summary>
-		internal Message BlockUntilCallback(Message m, int timeout = -1)
+		public Message BlockUntilCallback(Message m, int timeout = -1)
 		{
 			Message r = null;
 			CancellationTokenSource cts = new CancellationTokenSource();

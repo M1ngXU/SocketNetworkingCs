@@ -4,14 +4,14 @@ using System.Linq;
 
 namespace UnitySocketManager
 {
-	internal class Message
+	public class Message
 	{
-		internal bool IsCallback;
-		internal bool IsResponse;
-		internal byte Id;
-		internal byte[] Content;
-		internal bool CompletesOther;
-		internal bool ExpectNext;
+		public bool IsCallback;
+		public bool IsResponse;
+		public byte Id;
+		public byte[] Content;
+		public bool CompletesOther;
+		public bool ExpectNext;
 
 		private const byte SP_COMPLETION = 0b0010_0000;
 		private const byte SP_AWAITING_NEXT = 0b0001_0000;
@@ -19,7 +19,7 @@ namespace UnitySocketManager
 		private const byte SP_RESPONSE = 0b0000_0100;
 		private const byte SP_LENGTH = 0b0000_0011;
 
-		internal Message(byte[] buf, Func<byte[], int> read)
+		public Message(byte[] buf, Func<byte[], int> read)
 		{
 			int content_length_length = buf[0] & SP_LENGTH;
 
@@ -48,7 +48,7 @@ namespace UnitySocketManager
 			}
 		}
 
-		internal Message(
+		public Message(
 			byte[] Content,
 			byte Id = 0,
 			bool IsCallback = false,
@@ -65,14 +65,14 @@ namespace UnitySocketManager
 			this.ExpectNext = ExpectNext;
 		}
 
-		internal void SetResponse(byte[] content, bool isCallback = false)
+		public void SetResponse(byte[] content, bool isCallback = false)
 		{
 			IsCallback = isCallback;
 			Content = content;
 			IsResponse = true;
 		}
 
-		internal byte[][] GetSendableChunks(int max_size)
+		public byte[][] GetSendableChunks(int max_size)
 		{
 			List<byte[]> chunks = new List<byte[]>();
 			int offset = 0;

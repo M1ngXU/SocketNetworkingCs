@@ -4,23 +4,23 @@ using System.Linq;
 
 namespace UnitySocketManager
 {
-	internal class ULongId
+	public class ULongId
 	{
 		private ulong? Id;
 		private byte[] Bytes = new byte[8];
 
-		internal ULongId() => new Random().NextBytes(Bytes);
-		internal ULongId(ulong Id) => this.Id = Id;
-		internal ULongId(IEnumerable<byte> Id) : this(Id.ToArray()) { }
-		internal ULongId(params byte[] Id) => Array.Copy(Id, Bytes, Math.Min(Bytes.Length, Id.Length));
+		public ULongId() => new Random().NextBytes(Bytes);
+		public ULongId(ulong Id) => this.Id = Id;
+		public ULongId(IEnumerable<byte> Id) : this(Id.ToArray()) { }
+		public ULongId(params byte[] Id) => Array.Copy(Id, Bytes, Math.Min(Bytes.Length, Id.Length));
 
-		internal ulong GetId()
+		public ulong GetId()
 		{
 			if (!Id.HasValue) Id = ToUlong(Bytes);
 			return Id.Value;
 		}
 
-		internal byte[] GetBytes()
+		public byte[] GetBytes()
 		{
 			if (Bytes == null) Bytes = ToBytes(Id.Value);
 			return Bytes;

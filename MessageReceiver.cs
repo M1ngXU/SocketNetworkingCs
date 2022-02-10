@@ -3,12 +3,12 @@ using System.Linq;
 
 namespace UnitySocketManager
 {
-	internal class MessageReceiver
+	public class MessageReceiver
 	{
 		private readonly Action<Message>[] CallbackMessages = new Action<Message>[byte.MaxValue];
 		private readonly Message[] OpenMessages = new Message[byte.MaxValue];
 
-		internal Message HandleMessage(byte header, Func<byte[], int> get_next)
+		public Message HandleMessage(byte header, Func<byte[], int> get_next)
 		{
 			Message m = new Message(new byte[] { header }, get_next);
 
@@ -35,6 +35,6 @@ namespace UnitySocketManager
 			return null;
 		}
 
-		internal void AddListener(byte id, Action<Message> a) => CallbackMessages[id] = a;
+		public void AddListener(byte id, Action<Message> a) => CallbackMessages[id] = a;
 	}
 }

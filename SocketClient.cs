@@ -4,7 +4,7 @@ using System.Net.Sockets;
 
 namespace UnitySocketManager
 {
-	internal class SocketClient : Connection, ILogger
+	public class SocketClient : Connection, ILogger
 	{
 		string ILogger.Name => "Socket-Client";
 
@@ -14,7 +14,7 @@ namespace UnitySocketManager
 		private readonly ULongId ULongId = new ULongId();
 		private readonly Socket Socket;
 
-		internal SocketClient(IPEndPoint ip, ULongId id = null)
+		public SocketClient(IPEndPoint ip, ULongId id = null)
 		{
 			IPEndPoint = ip;
 			if (id != null) ULongId = id;
@@ -23,7 +23,7 @@ namespace UnitySocketManager
 
 		protected override void SendRaw(byte[] data) => Socket.Send(data);
 
-		internal override void Start(Action<Message> OnMessage)
+		public override void Start(Action<Message> OnMessage)
 		{
 			Socket.Connect(IPEndPoint);
 			Socket.Send(ULongId.GetBytes());
